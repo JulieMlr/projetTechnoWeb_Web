@@ -61,8 +61,14 @@ router.get('/modifier/:_idAdmin/:_id', (req, res) => {
 });
 
 /* Page inscription Admin*/
-router.get('/inscriptionAdmin', (req, res) => {
-  res.sendFile(path.resolve('inscription.html'));
+router.get('/inscriptionAdmin/:idsuperAdmin', (req, res) => {
+  const { idsuperAdmin } = req.params;
+  console.log(idsuperAdmin);
+
+  res.render('inscription.html', {
+    idsuperAdmin: idsuperAdmin,
+    erreur: ''
+  })
 });
 
 /* Page connexion Admin */
@@ -154,9 +160,10 @@ router.post('/modifierAdmin', async (req, res) => {
 });
 
 /* Inscription Admin */
-router.post('/inscriptionAdmin', async (req, res) => {
+router.post('/inscriptionAdmin/:idsuperAdmin', async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(req.body.user_password, salt);
+  const {idsuperAdmin} = req.params;
   const nom = req.body.user_name;
   const prenom = req.body.user_surname;
   const motDePasse = hash;
@@ -179,7 +186,7 @@ router.post('/inscriptionAdmin', async (req, res) => {
       newAdministrateur
         .save()
         .then((administrateur) =>
-          res.redirect('/administrateur/' + administrateur._id)
+          res.redirect('/administrateur/' + idsuperAdmin)
         )
         .catch((err) => console.log(err));
     });

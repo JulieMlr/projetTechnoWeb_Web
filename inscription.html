@@ -114,17 +114,20 @@
         src="https://cdn.discordapp.com/attachments/771665604977491978/832557884197044244/logo_large.png"
         alt="logo" /></a>
 
-
+<script>
+    var idsuperAdmin = `<%= idsuperAdmin%>`
+</script>
 
 <div class="form-style-5">
-    <form action="/administrateur/inscriptionAdmin" method="post">
+    <script>
+        document.write('<form action="/administrateur/inscriptionAdmin/' + idsuperAdmin + '" method=post>')
+    </script>
         <fieldset>
             <legend><span class="number">1</span> Information </legend>
             <input type="text" id="name" name="user_name" placeholder="Votre nom *" required>
             <input type="text" name="user_surname" id="surname" placeholder="Votre prénom *" required>
             <script>
                 var erreur = `<%= erreur%>`
-                console.log(erreur)
                 if (erreur === 'Email deja utilisé')
                     document.write("<div class='erreur'>" + erreur + "</div>")
             
@@ -134,6 +137,5 @@
                 required>
         </fieldset>
         <input type="submit" value="Inscription" />
-        <a href="/administrateur/connexionAdmin"><input type="button" value="Connexion"></input></a>
     </form>
 </div>
