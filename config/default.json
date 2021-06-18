@@ -1,0 +1,3 @@
+{
+    "MONGOURI":"mongodb+srv://dbUser:dbSecret2@cluster0.irono.mongodb.net/Running?retryWrites=true&w=majority"
+}
