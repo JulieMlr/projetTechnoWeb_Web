@@ -7,7 +7,7 @@ const Utilisateur = require("../models/Utilisateurs");
 
 router.get("/", (req, res) => {
   Utilisateur.find()
-    .then((utilisateurs) => res.render("accueilConnect.html", {nomUser:utilisateurs.nom, prenomUser:utilisateurs.prenom}))
+    .then((utilisateurs) => res.send(utilisateurs))
     .catch((err) => console.log(err));
 });
 
