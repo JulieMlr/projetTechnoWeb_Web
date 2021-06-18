@@ -20,4 +20,4 @@
 - localhost:5000/administrateur
 
 # Lien du site web
-https://projettechnoweb.herokuapp.com/administrateur
+https://junco-app.herokuapp.com/administrateur
