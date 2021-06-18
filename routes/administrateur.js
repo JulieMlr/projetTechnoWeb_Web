@@ -16,9 +16,13 @@ router.get('/', (req, res) => {
 router.get('/delete/:_idAdmin/:_id', (req, res) => {
   const { _id } = req.params;
   const { _idAdmin } = req.params;
+  console.log({_id})
   Utilisateur.findOneAndDelete({ _id: _id })
-    .then((administrateurs) => res.redirect('/administrateur/' + _idAdmin))
-    .catch((err) => console.log(err));
+    .then((administrateurs) => {
+      Course.deleteMany({idRunner: _id})
+      .then((courses)=> console.log("courses suprimées"))
+      res.redirect('/administrateur/' + _idAdmin)
+    })
 });
 
 /* Pour afficher les infos d'une course d'un Utilisateur */
@@ -184,15 +188,28 @@ router.post('/inscriptionAdmin', async (req, res) => {
 /* Page Accueil connecté */
 router.get('/:_id', (req, res) => {
   const { _id } = req.params;
+  const nomUser = []
+  const prenomUser = []
+  const emailUser = []
+  const idUser = []
   Utilisateur.find()
     .then((utilisateurs) => {
+      utilisateurs.forEach(element => {
+          nomUser.push(element.nom)
+          prenomUser.push(element.prenom)
+          emailUser.push(element.email)
+          idUser.push(element._id)
+      })
       Administrateur.findOne({ _id })
         .then((administrateurs) =>
           res.render('accueilConnect.html', {
             id: _id,
             nom: administrateurs.nom,
             prenom: administrateurs.prenom,
-            nomUser: ([] = utilisateurs),
+            nomUser: nomUser,
+            prenomUser:prenomUser,
+            emailUser:emailUser,
+            idUser:idUser
           })
         )
         .catch((err) => console.log(err));

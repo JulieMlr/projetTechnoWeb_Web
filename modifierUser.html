@@ -305,7 +305,9 @@
         }
     }
 </style>
-
+<head>
+    <link rel="icon" href="../../../logo_small_icon_only_inverted.ico" />
+</head>
 <div class="header">
     <a href="/administrateur/<%=idAdmin%>"><button class="custom-btn btn-3"><span>Retour</span></button></a>
     <p> Modification de l'utilisateur</p>
@@ -338,6 +340,7 @@
 
                     <script>
                         var idAdmin = `<%=idAdmin%>`
+                        console.log(idAdmin)
                         var idUser = `<%=id%>`
                         var date = new Date(`<%= dateDeNaissance %>`)
                         var dateString = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))

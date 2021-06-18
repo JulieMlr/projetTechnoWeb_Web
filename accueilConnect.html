@@ -271,13 +271,14 @@
     }
 </style>
 
-
+<head>
+    <link rel="icon" href="../logo_small_icon_only_inverted.ico" />
+</head>
 <div>
     <div class="header">
         <a href="/administrateur/connexionAdmin"><button class="custom-btn btn-3"><span>Deconnexion</span></button></a>
         <script>
             var idAdmin = `<%= id%>`
-            console.log(idAdmin)
             document.write("<a href=\"/administrateur/modifierAdmin/" + idAdmin + "\"><p><span class='nom'><%= nom %></span> <%= prenom %></p></a>");
         </script>
     </div>
@@ -296,17 +297,25 @@
             </thead>
             <tbody>
                 <script>
-                    var id = `<%= id%>`
-                    var nom = `<%= nomUser%>`.replaceAll("},{", '}|{')
-                    nom = nom.replaceAll(';, ', '; ')
-                    var tab = nom.split('|');
-                    var tab_bis = []
-                    for (var i = 0; i < tab.length; i++) {
-                        tab_bis = tab[i].split(",")
-                        document.write(" <tr><td class=\"column\">" + tab_bis[2].substring(13, tab_bis[2].length - 5) + "</td> <td class=\"column\">" + tab_bis[3].substring(16, tab_bis[3].length - 5) + "</td><td>" + tab_bis[5].substring(15, tab_bis[5].length - 5) + "</td><td><a href=\"/administrateur/modifier/" + id + "/" + tab_bis[1].substring(8, tab_bis[1].length) + " \"> <img src=\"https://cdn.discordapp.com/attachments/771665604977491978/832628015279243274/settings.png\" </a></td><td><a href=\"/administrateur/delete/" + id + "/" + tab_bis[1].substring(8, tab_bis[1].length) + " \"> <img src=\"https://cdn.discordapp.com/attachments/771665604977491978/840125893733253180/delete.png\" </a></td></tr>")
+                    var nom = `<%= nomUser%>`
+                    var prenom = `<%= prenomUser %>`
+                    var email = `<%= emailUser %>`
+                    var idUser = `<%= idUser %>`
+                    var tabnom = nom.split(',')
+                    var tabprenom = prenom.split(',')
+                    var tabemail = email.split(',')
+                    console.log(tabemail)
+                    var tabid = idUser.split(',')
+                    for (var i = 0; i < tabnom.length; i++) {
+                        document.write(" <tr><td class=\"column\">" + tabnom[i] + "</td>")
+                        document.write(" <td class=\"column\">" + tabprenom[i] + "</td>")   
+                        document.write(" <td>" + tabemail[i] + "</td>")    
+                        document.write("<td><a href=\"/administrateur/modifier/" + idAdmin + '/' + tabid[i] + " \"> <img src=\"https://cdn.discordapp.com/attachments/771665604977491978/832628015279243274/settings.png\" </a></td> ")   
+                        document.write("<td><a href=\"/administrateur/delete/" + idAdmin + "/" + tabid[i] + " \"> <img src=\"https://cdn.discordapp.com/attachments/771665604977491978/840125893733253180/delete.png\" </a></td></tr>")
                     }
                 </script>
             </tbody>
         </table>
     </div>
+    <!--"<td>" +  + "</td>"-->
 </div>
