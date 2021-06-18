@@ -80,6 +80,27 @@ router.get('/modifierAdmin/:_id', (req, res) => {
   });
 });
 
+/* Modifier User */
+router.post('/put', async (req, res) => {
+  const idAdmin = req.body.admin_id;
+  const idUser = req.body.user_id;
+  const nom = req.body.user_nom;
+  const prenom = req.body.user_prenom;
+  const email = req.body.user_email;
+  const dateDeNaissance = req.body.user_date;
+  Utilisateur.findOneAndUpdate(
+    {_id: idUser}, 
+    {
+      $set: {nom: nom,
+        prenom: prenom,
+        email: email,
+        dateDeNaissance: dateDeNaissance
+      },
+    }).then((utilisateur) => {
+      res.redirect('/administrateur/' + idAdmin)
+  })
+})
+
 /* Modifier Admin (nos informations) */
 router.post('/modifierAdmin', async (req, res) => {
   const idAdmin = req.body.admin_id;
