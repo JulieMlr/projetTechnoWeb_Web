@@ -165,6 +165,14 @@ router.put("/:_id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+router.put("/runTable/:_id", (req, res) => {
+  const { _id } = req.params
+  const tableauCourse = req.query.courses
+  Utilisateur.findOneAndUpdate({ _id }, { $set: tableauCourse })
+    .then((utilisateurs) => res.send("tableau course utilisateur mis à jour"))
+    .catch((err) => coonsole.log(err))
+})
+
 router.delete("/:_id", (req, res) => {
   const { _id } = req.params;
   Utilisateur.findOneAndDelete({ _id: _id })

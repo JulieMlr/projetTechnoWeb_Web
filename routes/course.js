@@ -31,6 +31,14 @@ router.get("/:_id",(req,res)=>{
 })
 
 
+router.get("/user/:idUser", (req, res) => {
+    const { idUser } = req.params
+    Course.find({ idRunner: idUser })
+        .then(courses => res.send(courses))
+        .catch(err => res.send(err))
+})
+
+
 router.put("/:_id",(req,res)=>{
     const {_id}=req.params
     const modifyCourse=req.body 
