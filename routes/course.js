@@ -11,15 +11,15 @@ router.post("/",(req,res)=>{
         kilometres, duree, date, vitesseMoyenne, idRunner
     })
     newCourse.save()
-    .then(courses=>res.send(courses))
-    .catch(err=>console.log(err))
+        .then(courses=>res.send(courses))
+        .catch(err=>console.log(err))
 })
 
 
 router.get("/",(req,res)=>{
     Course.find()
-    .then(courses=>res.send(courses))
-    .catch(err=>console.log(err))
+        .then(courses=>res.send(courses))
+        .catch(err=>console.log(err))
 })
 
 
@@ -27,7 +27,7 @@ router.get("/:_id",(req,res)=>{
     const {_id}=req.params
     Course.findOne({_id})
       .then(courses=>res.send(courses))
-    .catch(err=>console.log(err))
+      .catch(err=>console.log(err))
 })
 
 
@@ -43,15 +43,15 @@ router.put("/:_id",(req,res)=>{
     const {_id}=req.params
     const modifyCourse=req.body 
     Course.findOneAndUpdate({_id},{$set: modifyCourse}) 
-    .then(courses=>res.send("course Updated"))
-    .catch(err=>console.log(err))
+        .then(courses=>res.send("course Updated"))
+        .catch(err=>console.log(err))
 })
 
 router.delete("/:_id",(req,res)=>{
     const {_id}=req.params
     Course.findOneAndDelete({_id:_id})
-    .then(courses=>res.send("success"))
-    .catch(err=>console.log(err))
+        .then(courses=>res.send("success"))
+        .catch(err=>console.log(err))
 })
 
 

@@ -11,8 +11,8 @@ app.set('views', __dirname);
 const connectDB=require('./config/connectDB')
 
 //middleware
-app.use(bodyParser.urlencoded({ extended: true, limit: "50mb", parameterLimit: 50000 }));
-//app.use(express.json())
+app.use(express.json({ limit: "50mb" }))
+app.use(express.urlencoded({ extended: true, limit: "50mb", parameterLimit: 50000 }));
 app.use(cors())
 app.use(express.static(__dirname + '/'));
 app.engine('html', require('ejs').renderFile);
