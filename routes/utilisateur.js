@@ -168,7 +168,7 @@ router.put("/:_id", (req, res) => {
 router.put("/runTable/:_id", (req, res) => {
   const { _id } = req.params
   const tableauCourse = req.query.courses
-  Utilisateur.findOneAndUpdate({ _id }, { $set: tableauCourse })
+  Utilisateur.findOneAndUpdate({ _id }, { $set: { "tableauCourse": tableauCourse } })
     .then((utilisateurs) => res.send("tableau course utilisateur mis à jour"))
     .catch((err) => coonsole.log(err))
 })
