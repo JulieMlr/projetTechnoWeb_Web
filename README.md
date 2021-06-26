@@ -6,7 +6,10 @@
 
 ## Fonctionaliés
 - Connexion / Inscription
-- nom + prénom + email + password
+- Supprimer / Modifier un utilisateur
+- Inscription d'un administrateur (avec le compte superAdmin)
+- Modifier ses informations
+
 
 # API / Back-end
 
@@ -15,7 +18,6 @@
 - NodeJS
 
 # Lancement du projet
-- cd projetTechnoWeb_Web
 - npm run dev
 - localhost:5000/administrateur
 
