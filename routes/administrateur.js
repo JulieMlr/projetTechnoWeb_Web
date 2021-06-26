@@ -16,7 +16,6 @@ router.get('/', (req, res) => {
 router.get('/delete/:_idAdmin/:_id', (req, res) => {
   const { _id } = req.params;
   const { _idAdmin } = req.params;
-  console.log({_id})
   Utilisateur.findOneAndDelete({ _id: _id })
     .then((administrateurs) => {
       Course.deleteMany({idRunner: _id})
@@ -63,8 +62,6 @@ router.get('/modifier/:_idAdmin/:_id', (req, res) => {
 /* Page inscription Admin*/
 router.get('/inscriptionAdmin/:idsuperAdmin', (req, res) => {
   const { idsuperAdmin } = req.params;
-  console.log(idsuperAdmin);
-
   res.render('inscription.html', {
     idsuperAdmin: idsuperAdmin,
     erreur: ''
@@ -117,7 +114,6 @@ router.post('/modifierAdmin', async (req, res) => {
   const nom = req.body.user_nom;
   const prenom = req.body.user_prenom;
   const email = req.body.user_email;
-  console.log(req.body.user_password)
   if (req.body.user_password == "") {
     Administrateur.findOne({ _id: idAdmin }).then((administrateurAvant) => {
       const motDePasse = administrateurAvant.motDePasse;
@@ -171,7 +167,6 @@ router.post('/inscriptionAdmin/:idsuperAdmin', async (req, res) => {
 
   Administrateur.findOne({ email: email })
     .then((administrateur) => {
-      console.log(administrateur.email)
       res.render('inscription.html', {
         erreur: 'Email deja utilisé',
       })

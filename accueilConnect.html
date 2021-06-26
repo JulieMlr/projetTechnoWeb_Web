@@ -9,7 +9,6 @@
         width: 100%;
         height: auto;
         position: relative;
-        /*text-align: center;*/
     }
 
     p {
@@ -279,7 +278,6 @@
         <a href="/administrateur/connexionAdmin"><button class="custom-btn btn-3"><span>Deconnexion</span></button></a>
         <script>
             var idAdmin = `<%= id%>`
-            console.log(idAdmin)
             if (idAdmin === '60ccbc5befd0d6001594a32b') {
                 document.write('<a href="/administrateur/inscriptionAdmin/<%=id%>"><button class="custom-btn btn-3"><span>Inscription</span></button></a>')
             }
@@ -309,7 +307,6 @@
                     var tabnom = nom.split(',')
                     var tabprenom = prenom.split(',')
                     var tabemail = email.split(',')
-                    console.log(tabemail)
                     var tabid = idUser.split(',')
                     for (var i = 0; i < tabnom.length; i++) {
                         document.write(" <tr><td class=\"column\">" + tabnom[i] + "</td>")
@@ -322,5 +319,4 @@
             </tbody>
         </table>
     </div>
-    <!--"<td>" +  + "</td>"-->
 </div>

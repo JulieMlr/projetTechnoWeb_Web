@@ -13,7 +13,6 @@ router.get("/", (req, res) => {
 
 
 router.post("/inscriptionMobile", async (req, res) => {
-  console.log('ici')
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(req.query.motDePasse, salt);
   const nom = req.query.nom;
@@ -47,10 +46,8 @@ router.post("/inscriptionMobile", async (req, res) => {
 router.get("/connexionMobile", async (req, res) => {
   const email = req.query.email;
   const motDePasse = req.query.motDePasse;
-  console.log(email+' '+motDePasse)
   Utilisateur.findOne({ email: email })
     .then((utilisateurs) => {
-      console.log(utilisateurs)
       if (utilisateurs == null) {
         res.status(500).send('Something broke!')
       } else {
@@ -58,7 +55,6 @@ router.get("/connexionMobile", async (req, res) => {
           motDePasse,
           utilisateurs.motDePasse,
           function (err, response) {
-            console.log(utilisateurs)
             if (response == true) {
               res.send(utilisateurs);
             } else {
@@ -133,18 +129,10 @@ router.post("/inscription", async (req, res) => {
 router.post("/:_id", (req, res) => {
   const { _id } = req.params;
   const addCourseUtilisateur = req.query.course;
-  console.log(addCourseUtilisateur);
   Utilisateur.findOneAndUpdate({ _id }, { $push: {tableauCourse: addCourseUtilisateur} })
     .then((utilisateurs) => res.send("utilisateur Updated"))
     .catch((err) => console.log(err));
 });
-
-/*router.get("/:_id", (req, res) => {
-  const { _id } = req.params;
-  Utilisateur.findOne({ _id })
-    .then((utilisateurs) => res.send(utilisateurs))
-    .catch((err) => console.log(err));
-});*/
 
 router.get("/:email", (req, res) => {
   const { email } = req.params;
