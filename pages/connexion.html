@@ -14,7 +14,7 @@
         padding: 20px;
         background: #f4f7f8;
         border-radius: 8px;
-        font-family: Verdana;
+        font-family: Georgia, "Times New Roman", Times, serif;
     }
 
     .form-style-5 fieldset {
@@ -34,7 +34,7 @@
     .form-style-5 input[type="text"],
     .form-style-5 input[type="email"],
     .form-style-5 input[type="password"] {
-        font-family: Verdana;
+        font-family: Georgia, "Times New Roman", Times, serif;
         background: rgba(255, 255, 255, .1);
         border: none;
         border-radius: 4px;
@@ -95,47 +95,46 @@
         background: #109177;
     }
 
+    a {
+        text-decoration: none;
+    }
+
     .erreur {
         margin-bottom: 10px;
         font-family: Verdana;
         color: red;
         font-size: 13px;
     }
-    a {
-        text-decoration: none;
-    }
 </style>
 
 <head>
-    <link rel="icon" href="../logo_small_icon_only_inverted.ico" />
+    <link rel="icon" href="../images/logo_small_icon_only_inverted.ico" />
 </head>
-
 <a href="/administrateur"><img class="logo"
         src="https://cdn.discordapp.com/attachments/771665604977491978/832557884197044244/logo_large.png"
         alt="logo" /></a>
 
-<script>
-    var idsuperAdmin = `<%= idsuperAdmin%>`
-</script>
-
 <div class="form-style-5">
-    <script>
-        document.write('<form action="/administrateur/inscriptionAdmin/' + idsuperAdmin + '" method=post>')
-    </script>
+    <form action="/administrateur/connexion" method="post">
         <fieldset>
             <legend><span class="number">1</span> Information </legend>
-            <input type="text" id="name" name="user_name" placeholder="Votre nom *" required>
-            <input type="text" name="user_surname" id="surname" placeholder="Votre prénom *" required>
+
             <script>
                 var erreur = `<%= erreur%>`
-                if (erreur === 'Email deja utilisé')
+                if (erreur === 'Email incorrect')
                     document.write("<div class='erreur'>" + erreur + "</div>")
-            
             </script>
-            <input type="email" name="user_mail" id="mail" placeholder="Votre email *" required>
-            <input type="password" name="user_password" id="password" minlength="8" placeholder="Votre mot de passe *"
-                required>
+
+            <input type="email" id="mail" name="user_mail" placeholder="Votre email">
+
+            <script>
+                var erreur = `<%= erreur%>`
+                if (erreur === 'Mot de passe incorrect')
+                    document.write("<div class='erreur'>" + erreur + "</div>")
+            </script>
+
+            <input type="password" id="password" name="user_password" placeholder="Votre mot de passe"></input>
+            <input type="submit" value="Connexion"></input>
         </fieldset>
-        <input type="submit" value="Inscription" />
     </form>
 </div>

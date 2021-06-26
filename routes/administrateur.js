@@ -9,7 +9,7 @@ const Course = require('../models/Courses');
 
 /*Page Accueil */ 
 router.get('/', (req, res) => {
-  res.sendFile(path.resolve('accueil.html'));
+  res.sendFile(path.resolve('pages/accueil.html'));
 });
 
 /* Pour supprimer un Utilisateur */
@@ -30,7 +30,7 @@ router.get('/course/:idCourse/:idAdmin/:idUser', (req, res) => {
   const {idUser} = req.params;
   const {idAdmin} = req.params;
   Course.findOne({_id: idCourse}).then((courses) => {
-    res.render('courseUser.html', {
+    res.render('pages/courseUser.html', {
       idUser: idUser,
       id: idCourse,
       idAdmin: idAdmin,
@@ -46,7 +46,7 @@ router.get('/modifier/:_idAdmin/:_id', (req, res) => {
   const { _id } = req.params;
   const { _idAdmin } = req.params;
   Utilisateur.findOne({ _id: _id }).then((utilisateurs) => {
-    res.render('modifierUser.html', {
+    res.render('pages/modifierUser.html', {
       idAdmin: _idAdmin,
       id: _id,
       nom: utilisateurs.nom,
@@ -62,7 +62,7 @@ router.get('/modifier/:_idAdmin/:_id', (req, res) => {
 /* Page inscription Admin*/
 router.get('/inscriptionAdmin/:idsuperAdmin', (req, res) => {
   const { idsuperAdmin } = req.params;
-  res.render('inscription.html', {
+  res.render('pages/inscription.html', {
     idsuperAdmin: idsuperAdmin,
     erreur: ''
   })
@@ -70,14 +70,14 @@ router.get('/inscriptionAdmin/:idsuperAdmin', (req, res) => {
 
 /* Page connexion Admin */
 router.get('/connexionAdmin', (req, res) => {
-  res.sendFile(path.resolve('connexion.html'));
+  res.sendFile(path.resolve('pages/connexion.html'));
 });
 
 /* Page mon compte Admin */
 router.get('/modifierAdmin/:_id', (req, res) => {
   const { _id } = req.params;
   Administrateur.findOne({ _id: _id }).then((administrateur) => {
-    res.render('modifierAdmin.html', {
+    res.render('pages/modifierAdmin.html', {
       idAdmin: _id,
       nom: administrateur.nom,
       prenom: administrateur.prenom,
@@ -167,7 +167,7 @@ router.post('/inscriptionAdmin/:idsuperAdmin', async (req, res) => {
 
   Administrateur.findOne({ email: email })
     .then((administrateur) => {
-      res.render('inscription.html', {
+      res.render('pages/inscription.html', {
         erreur: 'Email deja utilisé',
       })
     })
@@ -204,7 +204,7 @@ router.get('/:_id', (req, res) => {
       })
       Administrateur.findOne({ _id })
         .then((administrateurs) =>
-          res.render('accueilConnect.html', {
+          res.render('pages/accueilConnect.html', {
             id: _id,
             nom: administrateurs.nom,
             prenom: administrateurs.prenom,
@@ -226,7 +226,7 @@ router.post('/connexion', (req, res) => {
   Administrateur.findOne({ email: email })
     .then((administrateurs) => {
       if (administrateurs == null) {
-        res.render('connexion.html', {
+        res.render('pages/connexion.html', {
           erreur: 'Email incorrect',
         });
       } else {
@@ -237,7 +237,7 @@ router.post('/connexion', (req, res) => {
             if (response == true) {
               res.redirect('/administrateur/' + administrateurs._id);
             } else {
-              res.render('connexion.html', {
+              res.render('pages/connexion.html', {
                 erreur: 'Mot de passe incorrect',
               });
             }

@@ -15,7 +15,12 @@
         text-align: center;
         font-size: xx-large;
         padding: 10px 0;
+        text-transform: capitalize;
         color: white;
+    }
+
+    .nom {
+        text-transform: uppercase;
     }
 
     .table-wrapper {
@@ -38,7 +43,7 @@
     .fl-table td,
     .fl-table th {
         text-align: center;
-        width: 20%;
+        width: 15%;
         padding: 8px;
     }
 
@@ -62,27 +67,29 @@
         background: #F8F8F8;
     }
 
+    .column {
+        text-transform: capitalize;
+    }
+
+    .liste {
+        text-align: center;
+        margin-top: 20px;
+        font-size: large;
+    }
+
     a {
         text-decoration: none;
         color: black;
     }
 
-    input {
-        width: 80%;
+    img {
+        width: 10%;
     }
 
     .custom-btn {
-        color: white;
-    }
-
-    .button {
-        text-align: center;
-    }
-
-    .custom-btn,
-    .custom-btn-bis {
         width: 130px;
         height: 40px;
+        color: white;
         border-radius: 5px;
         padding: 10px 25px;
         font-family: 'Lato', sans-serif;
@@ -98,25 +105,17 @@
         outline: none;
     }
 
-    .btn-3,
-    .btn-3-bis {
+    .btn-3 {
         background: none;
         width: 130px;
         height: 40px;
         line-height: 42px;
         padding: 0;
-    }
-
-    .btn-3 {
         border: white;
+
     }
 
-    .btn-3-bis {
-        border: black;
-    }
-
-    .btn-3 span,
-    .btn-3-bis span {
+    .btn-3 span {
         position: relative;
         display: block;
         width: 100%;
@@ -125,50 +124,34 @@
 
     .btn-3:before,
     .btn-3:after {
-        background: white;
-    }
-
-    .btn-3-bis:before,
-    .btn-3-bis:after {
-        background: black;
-    }
-
-    .btn-3:before,
-    .btn-3:after,
-    .btn-3-bis:before,
-    .btn-3-bis:after {
         position: absolute;
         content: "";
         right: 0;
         top: 0;
+        background: white;
         transition: all 0.3s ease;
     }
 
-    .btn-3:before,
-    .btn-3-bis:before {
+    .btn-3:before {
         height: 0%;
         width: 2px;
     }
 
-    .btn-3:after,
-    .btn-3-bis:after {
+    .btn-3:after {
         width: 0%;
         height: 2px;
     }
 
-    .btn-3:hover,
-    .btn-3-bis:hover {
+    .btn-3:hover {
         background: transparent;
         box-shadow: none;
     }
 
-    .btn-3:hover:before,
-    .btn-3-bis:hover:before {
+    .btn-3:hover:before {
         height: 100%;
     }
 
-    .btn-3:hover:after,
-    .btn-3-bis:hover:after {
+    .btn-3:hover:after {
         width: 100%;
     }
 
@@ -176,50 +159,31 @@
         color: white;
     }
 
-    .btn-bis span:hover {
-        color: black;
-    }
-
     .btn-3 span:before,
-    .btn-3 span:after,
-    .btn-3-bis span:before,
-    .btn-3-bis span:after {
+    .btn-3 span:after {
         position: absolute;
         content: "";
         left: 0;
         bottom: 0;
+        background: white;
         transition: all 0.3s ease;
     }
 
-    .btn-3 span:before,
-    .btn-3 span:after {
-        background: white;
-    }
-
-    .btn-3-bis span:before,
-    .btn-3-bis span:after {
-        background: black;
-    }
-
-    .btn-3 span:before,
-    .btn-3-bis span:before {
+    .btn-3 span:before {
         width: 2px;
         height: 0%;
     }
 
-    .btn-3 span:after,
-    .btn-3-bis span:after {
+    .btn-3 span:after {
         width: 0%;
         height: 2px;
     }
 
-    .btn-3 span:hover:before,
-    .btn-3-bis span:hover:before {
+    .btn-3 span:hover:before {
         height: 100%;
     }
 
-    .btn-3 span:hover:after,
-    .btn-3-bis span:hover:after {
+    .btn-3 span:hover:after {
         width: 100%;
     }
 
@@ -305,66 +269,54 @@
         }
     }
 </style>
+
 <head>
-    <link rel="icon" href="../../../logo_small_icon_only_inverted.ico" />
+    <link rel="icon" href="../images/logo_small_icon_only_inverted.ico" />
 </head>
-<div class="header">
-    <a href="/administrateur/<%=idAdmin%>"><button class="custom-btn btn-3"><span>Retour</span></button></a>
-    <p> Modification de l'utilisateur</p>
-</div>
-<div class="table-wrapper">
-    <table class="fl-table">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Email</th>
-                <th>Date de naissance</th>
-                <th>Courses</th>
-            </tr>
-        </thead>
-        <tbody>
-            <form action="/administrateur/put" method="post">
-                <input type="text" name="admin_id" value=<%=idAdmin%> style="display: none;"/>
-                <input type="text" name="user_id" value=<%=id%> style="display: none;"/>
+<div>
+    <div class="header">
+        <a href="/administrateur/connexionAdmin"><button class="custom-btn btn-3"><span>Deconnexion</span></button></a>
+        <script>
+            var idAdmin = `<%= id%>`
+            if (idAdmin === '60ccbc5befd0d6001594a32b') {
+                document.write('<a href="/administrateur/inscriptionAdmin/<%=id%>"><button class="custom-btn btn-3"><span>Inscription</span></button></a>')
+            }
+
+            document.write("<a href=\"/administrateur/modifierAdmin/" + idAdmin + "\"><p><span class='nom'><%= nom %></span> <%= prenom %></p></a>");
+        </script>
+    </div>
+
+    <div class="liste"> Liste des utilisateurs </div>
+    <div class="table-wrapper">
+        <table class="fl-table">
+            <thead>
                 <tr>
-                    <td>
-                        <input type="text" name="user_nom" value=<%=nom%> />
-                    </td>
-                    <td>
-                        <input type="text" name="user_prenom" value=<%=prenom %> />
-                    </td>
-                    <td>
-                        <input type="email" name="user_email" value=<%=email %> />
-                    </td>
-
-                    <script>
-                        var idAdmin = `<%=idAdmin%>`
-                        var idUser = `<%=id%>`
-                        var date = new Date(`<%= dateDeNaissance %>`)
-                        var dateString = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
-                            .toISOString()
-                            .split("T")[0];
-                        document.write("<td><input type=\"date\" name=\"user_date\" value=" + dateString + "></td>")
-                        var tabCourse = `<%= tableauCourse%>`
-                        var tab = tabCourse.split(',');
-                        var tab_bis = []
-                        for (var i = 0; i < tab.length; i++) {
-                            tab_bis = tab[i]
-                            if (i == 1) {
-                                document.write("<td><a href=\"/administrateur/course/" + tab_bis + "/" + idAdmin + "/" + idUser + "\">" + tab_bis + "</a></td>")
-                            }
-                            if (i > 1) {
-                                document.write("<tr><td></td><td></td><td></td><td></td><td><a href=\"/administrateur/course/" + tab_bis + "/" + idAdmin + "/" + idUser + "\">" + tab_bis + "</a></td></tr>")
-
-                            }
-                        }
-                    </script>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Email</th>
+                    <th></th>
+                    <th></th>
                 </tr>
-                <div class="button">
-                    <button class="custom-btn-bis btn-3-bis"><span>Modifier</span></button>
-                </div>
-            </form>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <script>
+                    var nom = `<%= nomUser%>`
+                    var prenom = `<%= prenomUser %>`
+                    var email = `<%= emailUser %>`
+                    var idUser = `<%= idUser %>`
+                    var tabnom = nom.split(',')
+                    var tabprenom = prenom.split(',')
+                    var tabemail = email.split(',')
+                    var tabid = idUser.split(',')
+                    for (var i = 0; i < tabnom.length; i++) {
+                        document.write(" <tr><td class=\"column\">" + tabnom[i] + "</td>")
+                        document.write(" <td class=\"column\">" + tabprenom[i] + "</td>")
+                        document.write(" <td>" + tabemail[i] + "</td>")
+                        document.write("<td><a href=\"/administrateur/modifier/" + idAdmin + '/' + tabid[i] + " \"> <img src=\"https://cdn.discordapp.com/attachments/771665604977491978/832628015279243274/settings.png\" </a></td> ")
+                        document.write("<td><a href=\"/administrateur/delete/" + idAdmin + "/" + tabid[i] + " \"> <img src=\"https://cdn.discordapp.com/attachments/771665604977491978/840125893733253180/delete.png\" </a></td></tr>")
+                    }
+                </script>
+            </tbody>
+        </table>
+    </div>
 </div>
