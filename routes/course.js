@@ -3,6 +3,7 @@ const router=express.Router()
 
 const Course=require('../models/Courses')
 
+/* Ajouter une nouvelle course */
 router.post("/",(req,res)=>{
     const { kilometres, duree, date, vitesseMoyenne, idRunner } = req.query
     const newCourse=new Course({
@@ -13,13 +14,14 @@ router.post("/",(req,res)=>{
         .catch(err=>console.log(err))
 })
 
+/* Afficher toutes les courses */
 router.get("/",(req,res)=>{
     Course.find()
         .then(courses=>res.send(courses))
         .catch(err=>console.log(err))
 })
 
-
+/* Afficher les cours d'un utilisateurs */
 router.get("/:_id",(req,res)=>{
     const {_id}=req.params
     Course.findOne({_id})

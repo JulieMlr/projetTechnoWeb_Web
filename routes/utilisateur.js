@@ -5,13 +5,14 @@ const bcrypt = require("bcrypt");
 
 const Utilisateur = require("../models/Utilisateurs");
 
+/* Afficher tout les utilisateurs */
 router.get("/", (req, res) => {
   Utilisateur.find()
     .then((utilisateurs) => res.send(utilisateurs))
     .catch((err) => console.log(err));
 });
 
-
+/* Ajouter un nouvel utilisateur (inscription) */
 router.post("/inscriptionMobile", async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(req.query.motDePasse, salt);
@@ -43,6 +44,7 @@ router.post("/inscriptionMobile", async (req, res) => {
     .catch((err) => console.log(err));
 })
 
+/* Connexion d'un utilisateur */
 router.get("/connexionMobile", async (req, res) => {
   const email = req.query.email;
   const motDePasse = req.query.motDePasse;
@@ -67,6 +69,7 @@ router.get("/connexionMobile", async (req, res) => {
     .catch((err) => res.send(err));
 });
 
+/* 
 router.post("/information", async (req, res) => {
   const email = req.body.user_mail;
   const motDePasse = req.body.user_password;
@@ -89,8 +92,9 @@ router.post("/information", async (req, res) => {
       }
     })
     .catch((err) => res.send(err));
-});
+}); */
 
+/*
 router.post("/inscription", async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(req.body.user_password, salt);
@@ -104,8 +108,6 @@ router.post("/inscription", async (req, res) => {
   const sexe = req.body.sexe;
   const photo = req.body.photo;
   const tableauCourse = req.body.tableauCourse;
-
-
 
   const newUtilisateur = new Utilisateur({
     nom,
@@ -126,6 +128,9 @@ router.post("/inscription", async (req, res) => {
     .catch((err) => console.log(err));
 });
 
+*/
+
+/* Ajouter une course dans le tableauCourse de l'utilisateur */
 router.post("/:_id", (req, res) => {
   const { _id } = req.params;
   const addCourseUtilisateur = req.query.course;
@@ -134,13 +139,16 @@ router.post("/:_id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+/* 
 router.get("/:email", (req, res) => {
   const { email } = req.params;
   Utilisateur.findOne({ email })
     .then((utilisateurs) => res.send(utilisateurs))
     .catch((err) => console.log(err));
 });
+*/
 
+/* Modifier taille poids sexe d'un utilisateur */
 router.put("/:_id", (req, res) => {
   const { _id } = req.params;
   const modifyUser = {
@@ -153,6 +161,7 @@ router.put("/:_id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+/* Mettre à jour le tableauCourse */
 router.put("/runTable/:_id", (req, res) => {
   const { _id } = req.params
   const tableauCourse = req.query.courses
@@ -161,11 +170,12 @@ router.put("/runTable/:_id", (req, res) => {
     .catch((err) => coonsole.log(err))
 })
 
+/*
 router.delete("/:_id", (req, res) => {
   const { _id } = req.params;
   Utilisateur.findOneAndDelete({ _id: _id })
     .then((utilisateurs) => res.send("success"))
     .catch((err) => console.log(err));
-});
+});*/
 
 module.exports = router;
