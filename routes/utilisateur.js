@@ -139,14 +139,14 @@ router.post("/:_id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-/* 
+
 router.get("/:email", (req, res) => {
   const { email } = req.params;
   Utilisateur.findOne({ email })
     .then((utilisateurs) => res.send(utilisateurs))
     .catch((err) => console.log(err));
 });
-*/
+
 
 /* Modifier taille poids sexe d'un utilisateur */
 router.put("/:_id", (req, res) => {
