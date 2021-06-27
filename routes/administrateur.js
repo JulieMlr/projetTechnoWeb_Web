@@ -36,7 +36,7 @@ router.get('/course/:idCourse/:idAdmin/:idUser', (req, res) => {
       idAdmin: idAdmin,
       duree: courses.duree,
       date: courses.date,
-      kilometres: courses.kilometres,
+      metres: courses.metres,
     });
   });
 });
@@ -167,24 +167,27 @@ router.post('/inscriptionAdmin/:idsuperAdmin', async (req, res) => {
 
   Administrateur.findOne({ email: email })
     .then((administrateur) => {
-      res.render('pages/inscription.html', {
-        erreur: 'Email deja utilisé',
-      })
+      if (administrateur != null) {
+        res.render('pages/inscription.html', {
+          idsuperAdmin: idsuperAdmin,
+          erreur: 'Email deja utilisé',
+        });
+      }
+      else {
+        const newAdministrateur = new Administrateur({
+          nom,
+          prenom,
+          email,
+          motDePasse,
+        });
+        newAdministrateur
+          .save()
+          .then((administrateur) =>
+            res.redirect('/administrateur/' + idsuperAdmin)
+          )
+          .catch((err) => console.log(err));
+      }
     })
-    .catch((err) => {
-      const newAdministrateur = new Administrateur({
-        nom,
-        prenom,
-        email,
-        motDePasse,
-      });
-      newAdministrateur
-        .save()
-        .then((administrateur) =>
-          res.redirect('/administrateur/' + idsuperAdmin)
-        )
-        .catch((err) => console.log(err));
-    });
 });
 
 /* Page Accueil connecté */

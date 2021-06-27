@@ -305,6 +305,7 @@
         }
     }
 </style>
+
 <head>
     <link rel="icon" href="../../../images/logo_small_icon_only_inverted.ico" />
 </head>
@@ -351,12 +352,10 @@
                         var tab_bis = []
                         for (var i = 0; i < tab.length; i++) {
                             tab_bis = tab[i]
-                            if (i == 1) {
+                            if (tab_bis != "") {
+                                console.log(" pas vide")
+                                console.log(tab_bis)
                                 document.write("<td><a href=\"/administrateur/course/" + tab_bis + "/" + idAdmin + "/" + idUser + "\">" + tab_bis + "</a></td>")
-                            }
-                            if (i > 1) {
-                                document.write("<tr><td></td><td></td><td></td><td></td><td><a href=\"/administrateur/course/" + tab_bis + "/" + idAdmin + "/" + idUser + "\">" + tab_bis + "</a></td></tr>")
-
                             }
                         }
                     </script>
