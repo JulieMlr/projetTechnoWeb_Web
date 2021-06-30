@@ -154,7 +154,8 @@ router.put("/:_id", (req, res) => {
   const modifyUser = {
     "taille": req.query.taille,
     "poids": req.query.poids,
-    "sexe": req.query.sexe
+    "sexe": req.query.sexe,
+    "photo": req.query.photo
   }
   Utilisateur.findOneAndUpdate({ _id }, { $set: modifyUser })
     .then((utilisateurs) => res.send("utilisateur Updated"))
