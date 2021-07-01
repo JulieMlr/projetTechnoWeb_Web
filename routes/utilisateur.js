@@ -69,67 +69,6 @@ router.get("/connexionMobile", async (req, res) => {
     .catch((err) => res.send(err));
 });
 
-/* 
-router.post("/information", async (req, res) => {
-  const email = req.body.user_mail;
-  const motDePasse = req.body.user_password;
-  Utilisateur.findOne({ email: email })
-    .then((utilisateurs) => {
-      if (utilisateurs == null) {
-        res.sendFile(path.resolve("connexion.html"));
-      } else {
-        bcrypt.compare(
-          motDePasse,
-          utilisateurs.motDePasse,
-          function (err, response) {
-            if (response == true) {
-              res.send("Hello");
-            } else {
-              res.sendFile(path.resolve("connexion.html"));
-            }
-          }
-        );
-      }
-    })
-    .catch((err) => res.send(err));
-}); */
-
-/*
-router.post("/inscription", async (req, res) => {
-  const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hash(req.body.user_password, salt);
-  const nom = req.body.user_name;
-  const prenom = req.body.user_surname;
-  const motDePasse = hash;
-  const email = req.body.user_mail;
-  const dateDeNaissance = req.body.user_date;
-  const taille = req.body.taille;
-  const poids = req.body.poids;
-  const sexe = req.body.sexe;
-  const photo = req.body.photo;
-  const tableauCourse = req.body.tableauCourse;
-
-  const newUtilisateur = new Utilisateur({
-    nom,
-    prenom,
-    email,
-    motDePasse,
-    dateDeNaissance,
-    taille,
-    poids,
-    sexe,
-    photo,
-    tableauCourse,
-    droit,
-  });
-  newUtilisateur
-    .save()
-    .then((utilisateurs) => res.send("Utilisateur a bien été crée"))
-    .catch((err) => console.log(err));
-});
-
-*/
-
 /* Ajouter une course dans le tableauCourse de l'utilisateur */
 router.post("/:_id", (req, res) => {
   const { _id } = req.params;
@@ -170,13 +109,5 @@ router.put("/runTable/:_id", (req, res) => {
     .then((utilisateurs) => res.send("tableau course utilisateur mis à jour"))
     .catch((err) => coonsole.log(err))
 })
-
-/*
-router.delete("/:_id", (req, res) => {
-  const { _id } = req.params;
-  Utilisateur.findOneAndDelete({ _id: _id })
-    .then((utilisateurs) => res.send("success"))
-    .catch((err) => console.log(err));
-});*/
 
 module.exports = router;
